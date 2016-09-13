@@ -45,6 +45,7 @@ namespace SimpleCalculator {
 	private: System::Windows::Forms::TextBox^  textBox3;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::LinkLabel^  linkLabel1;
 
 	private:
 		/// <summary>
@@ -70,6 +71,7 @@ namespace SimpleCalculator {
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -155,6 +157,8 @@ namespace SimpleCalculator {
 			// label2
 			// 
 			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(292, 26);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(13, 13);
@@ -169,12 +173,24 @@ namespace SimpleCalculator {
 			this->label3->Size = System::Drawing::Size(0, 13);
 			this->label3->TabIndex = 9;
 			// 
+			// linkLabel1
+			// 
+			this->linkLabel1->AutoSize = true;
+			this->linkLabel1->Location = System::Drawing::Point(423, 28);
+			this->linkLabel1->Name = L"linkLabel1";
+			this->linkLabel1->Size = System::Drawing::Size(31, 13);
+			this->linkLabel1->TabIndex = 10;
+			this->linkLabel1->TabStop = true;
+			this->linkLabel1->Text = L"Copy";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &SimpleCalculator::linkLabel1_LinkClicked);
+			// 
 			// SimpleCalculator
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoSize = true;
 			this->ClientSize = System::Drawing::Size(455, 126);
+			this->Controls->Add(this->linkLabel1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->textBox3);
@@ -276,5 +292,10 @@ namespace SimpleCalculator {
 					 break;
 				 }
 			 }
-	};
+	private: System::Void linkLabel1_LinkClicked(System::Object^  sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^  e) {
+				 Clipboard::SetText(textBox3->Text);
+				 textBox3->ResetText();
+	
+	}
+};
 }
